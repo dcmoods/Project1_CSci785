@@ -10,7 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Properties;
 
-public class Server {
+public class NameServer {
 	private static Properties prop;
 	public static void main(String[] args) throws Exception {
         prop = new Properties();
@@ -19,8 +19,8 @@ public class Server {
         
         try {
         	prop.load(input);        
-        	System.out.println(prop.getProperty("phoneserver"));
-        	System.out.println(prop.getProperty("emailserver"));
+        	System.out.println(prop.getProperty("phone"));
+        	System.out.println(prop.getProperty("email"));
         } catch (IOException e) {
         	System.out.println("Error: " + e.getMessage());
         }
@@ -29,16 +29,16 @@ public class Server {
         int clientNumber = 0;
         try (ServerSocket listener = new ServerSocket(5002)) {
             while (System.in.available() == 0) {
-                new ClientDispatcher(listener.accept(), clientNumber++).start();
+                new Dispatcher(listener.accept(), clientNumber++).start();
             }
         }
     }
 
-    private static class ClientDispatcher extends Thread {
+    private static class Dispatcher extends Thread {
         private Socket socket;
         private int clientNumber;
 
-        public ClientDispatcher(Socket socket, int clientNumber) {
+        public Dispatcher(Socket socket, int clientNumber) {
             this.socket = socket;
             this.clientNumber = clientNumber;
             System.out.println("New client #" + clientNumber + " connected at " + socket);
