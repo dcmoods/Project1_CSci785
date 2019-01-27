@@ -3,26 +3,41 @@ package com.moody;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.*;
-import java.util.Properties;
+import java.util.*;
 
 public class DataServer extends Thread {
 	 
     private DatagramSocket socket;
     private boolean running;
-    private byte[] buf = new byte[1024];
     private InetAddress _host;
     private Properties prop;
+    private PropertyParser parser;
+
     private byte[] in;
 	private byte[] out;
  
     public DataServer(String host, int port) throws FileNotFoundException, IOException {
-    	_host = InetAddress.getByName(host);
-        socket = new DatagramSocket(port, _host);
-        prop = new Properties();
-        prop.load(new FileInputStream("config.properties")); 
+    	_host = InetAddress.getByName(host); //setup host
+        socket = new DatagramSocket(port, _host); //setup socket
+        prop = new Properties(); //init prop
+        prop.load(new FileInputStream("config.properties")); //load properties file
+        parser = new PropertyParser(prop); //load prop into parser
+        Set<Object> keys = parser.getAllKeys();
+        for(Object k:keys){
+            String key = (String)k;
+            String value[] = parser.getPropertyValue(key).split(":");
+            boolean available 
+            	= ServerUtils.hostAvailabilityCheck(value[0], Integer.parseInt(value[1]));
+            
+            if(available) {
+            	System.out.println("Server - " +key+ 
+            			" at " + parser.getPropertyValue(key) + " is avalabile.");
+            } else {
+            	System.out.println("Server - " +key+ 
+            			" at " + parser.getPropertyValue(key) + " is down.");
+            }
+        }
     }
  
     public void run() {
@@ -52,7 +67,7 @@ public class DataServer extends Thread {
                 continue;
             }
             try {
-            	String data = prop.getProperty(received.toString().trim());
+            	String data = parser.getPropertyValue(received.toString().trim());
             	System.out.println("Response from server: " + data);
             	out = data.getBytes();
             	packet = new DatagramPacket(out, out.length, address, port);
