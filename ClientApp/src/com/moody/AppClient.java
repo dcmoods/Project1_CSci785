@@ -1,4 +1,4 @@
-package com;
+package com.moody;
 
 import java.io.IOException;
 import java.net.*;
