@@ -48,7 +48,6 @@ public class PhoneServer {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
                 out.println("Hello, you are client #" + clientNumber);
-
            
                 while (true) {
                     String input = in.readLine();
