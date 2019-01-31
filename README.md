@@ -1,14 +1,14 @@
-# PProject1_CSci785 Distributed Database
+# Project1_CSci785 Distributed Database
 
 This is a java based application meant to demoonstrate the core concepts of client server architecture in a distributated environment. The application makes use of standard java Sockets, IO, and Threads.  There are three servers in total (Phone, Email, Name) and one client which is used to communicated with the servers. The name server is intended to be the entry point to the other servers from the client returning connection information.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Pull down a local copy of the project and open in eclipse or any other java base idea.  
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+The system must have java version "1.8.0_151" or later installed to run the server and clients. 
 
 ```
 Give examples
