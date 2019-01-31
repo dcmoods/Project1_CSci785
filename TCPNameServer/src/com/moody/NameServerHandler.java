@@ -37,7 +37,7 @@ public class NameServerHandler {
 	        }
 	        //start to listen
 	        while (true)
-	        	new EchoClientHandler(serverSocket.accept()).start();
+	        	new ClienHandler(serverSocket.accept()).start();
 	        
 	        
 		} catch (IOException e) {
@@ -49,12 +49,12 @@ public class NameServerHandler {
         serverSocket.close();
     }
  
-    private static class EchoClientHandler extends Thread {
+    private static class ClienHandler extends Thread {
         private Socket clientSocket;
         private PrintWriter out;
         private BufferedReader in;
  
-        public EchoClientHandler(Socket socket) {
+        public ClienHandler(Socket socket) {
             this.clientSocket = socket;
         }
  

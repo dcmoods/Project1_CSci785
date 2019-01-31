@@ -29,6 +29,7 @@ public class Startup {
 	            System.out.println("\nEnter a command to send to the server (empty to quit):");
 	            String command = scanner.nextLine(); 
 	            if (command == null || command.isEmpty()) {
+	            	client.stopConnection();
 	            	break;
 	            }
 	            
@@ -56,7 +57,6 @@ public class Startup {
 	            	if (tableCommand.equalsIgnoreCase("phone") || 
             			tableCommand.equalsIgnoreCase("email")) {
 	            		
-	            		System.out.println("Sending call to client.");
 	        			String nsResponse = client.sendMessage(tableCommand);
 	        			if (nsResponse.contains(":")) {
 	        				tableFQDN = nsResponse;
@@ -99,6 +99,7 @@ public class Startup {
  	            
 	        }
         	client.stopConnection();
+        	scanner.close();
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
