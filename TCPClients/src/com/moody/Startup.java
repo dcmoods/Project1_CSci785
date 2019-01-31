@@ -26,7 +26,8 @@ public class Startup {
 
         		client = new ClientHandler();
         		client.startConnection("localhost", 5555);
-	            System.out.println("\nEnter a command to send to the server (empty to quit):");
+   
+	            System.out.println("\nEnter a command to send to the server (empty to quit), 'help' to see options:");
 	            String command = scanner.nextLine(); 
 	            if (command == null || command.isEmpty()) {
 	            	client.stopConnection();
@@ -44,7 +45,20 @@ public class Startup {
             			operation.equalsIgnoreCase("del") ||
             			operation.equalsIgnoreCase("put") ) {
 	            			operationCommand = operation;
-	            	} else {
+	            	} else if(operation.equalsIgnoreCase("help")){
+	            		response += "Usage: [operation] [table] [key] optional [data]\n";
+	            		response += "operations: \n";
+	            		response += "\t get: return data. \n";
+	            		response += "\t put: add data. \n";
+	            		response += "\t del: remove data. \n";
+	            		response += "tables: \n";
+	            		response += "\t phone: query phone table. \n";
+	            		response += "\t email: query email table. \n";
+	            		response += "key: \n";
+	            		response += "\t key is a name or any other string. \n";
+	            		response += "data: \n";
+	            		response += "\t data used the the [put] option and is any value to be store. \n";
+	            	}else {
 	            		response += operation + " is not a valid command. \n";
 	            	}
 	            } else {
