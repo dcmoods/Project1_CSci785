@@ -8,37 +8,60 @@ Pull down a local copy of the project and open in eclipse or any other java base
 
 ### Prerequisites
 
-The system must have java version "1.8.0_151" or later installed to run the server and clients. 
+The system must have java installed.  
 
 ```
-Give examples
+java version 1.8.0_151 or greated is required
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Open the project in eclipse by importing the repository.
+There should be a list of the four java applications. 
+TCPClient
+TCPEmailServer
+TCPNameServer
+TCPPhoneServer
 
-Say what the step will be
+Start by lauching the server applications first.
 
 ```
-Give the example
+ Right Click TCPEmailServer project -> "Run as" -> Java Application. 
 ```
 
-And repeat
+Repeat for the TCPPhone and TCPName Servers, as well as the TCPClient. The Client applicaiton must be last. 
 
 ```
-until finished
+Right Click TCPClient project -> "Run as" -> Java Application. 
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+In the command prompt for the client enter:
+```
+get phone alan
+```
 
+You should see a response of:
+```
+701-111-2222
+```
+
+## Running the projects from JAR files
+
+If running the servers from the complied jar files, then open a command propmt, navigate to each folder and issue the following:
+
+```
+java -jar [FileName].jar
+```
+This must be done for each project, so a total of four command propmts must be opened. 
+
+## The easy way
+
+Double click the Batch file included to Project_Jar directory and all the command prompts will launched automatically. When finished just close the windows to terminate. 
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
- 
+* [Java](https://www.oracle.com/technetwork/java/javase/downloads/index.html) - Language
+* [Eclipse](https://www.eclipse.org/) - IDE 
 
 ## Authors
 
